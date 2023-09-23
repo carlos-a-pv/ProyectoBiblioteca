@@ -27,12 +27,12 @@
                               <Image url="@../resources/imagen.jpeg" />
                            </image>
                         </ImageView>
-                        <Button layoutX="175.0" layoutY="277.0" mnemonicParsing="false" text="Prestamo">
+                        <Button fx:id="btnPrestamo" layoutX="175.0" layoutY="277.0" mnemonicParsing="false" onAction="#onClickPrestamo" text="Prestamo">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button layoutX="336.0" layoutY="277.0" mnemonicParsing="false" text="Devolucion">
+                        <Button fx:id="btnDevolucion" layoutX="336.0" layoutY="277.0" mnemonicParsing="false" onAction="#onClickDevolucion" text="Devolucion">
                            <font>
                               <Font size="15.0" />
                            </font>

@@ -8,7 +8,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("./view/principal-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 700);
         stage.setTitle("BIBLIOTECA UNIQUINDIO");
         stage.setScene(scene);
         stage.show();

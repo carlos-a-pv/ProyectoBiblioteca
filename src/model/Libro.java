@@ -5,11 +5,13 @@ import java.time.LocalDate;
 public class Libro {
 
     private Autor autor;
+    private String nombre;
     private LocalDate fechaPublicacion;
     private Tema temario;
+    private EstadoLibro estado;
 
-    public Libro(Autor autor, LocalDate fechaPublicacion){
-        this.fechaPublicacion = fechaPublicacion;
+    public Libro(String nombre, Autor autor){
+        this.nombre = nombre;
         this.autor = autor;
     }
 
@@ -35,6 +37,22 @@ public class Libro {
 
     public void setTemario(Tema temario) {
         this.temario = temario;
+    }
+
+    public EstadoLibro getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoLibro estado) {
+        this.estado = estado;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 }
 
