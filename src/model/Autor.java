@@ -46,4 +46,9 @@ public class Autor {
     public void setLibrosEscritos(ArrayList<Libro> librosEscritos) {
         this.librosEscritos = librosEscritos;
     }
+
+    @Override
+    public String toString() {
+        return nombre.toUpperCase();
+    }
 }

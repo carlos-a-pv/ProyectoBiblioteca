@@ -1,5 +1,6 @@
 package model;
 
+import javax.print.attribute.SupportedValuesAttribute;
 import java.time.LocalDate;
 
 public class Libro {
@@ -13,6 +14,8 @@ public class Libro {
     public Libro(String nombre, Autor autor){
         this.nombre = nombre;
         this.autor = autor;
+        this.fechaPublicacion = LocalDate.now();
+        this.estado = EstadoLibro.NO_PRESTADO;
     }
 
     public Autor getAutor() {
