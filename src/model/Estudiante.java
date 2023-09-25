@@ -1,6 +1,6 @@
 package model;
 
-public class Estudiante {
+public class Estudiante implements Comparable <Estudiante> {
     private String nombre;
     private String apellido;
     private String id;
@@ -37,4 +37,9 @@ public class Estudiante {
 
     public void solicitarLibro(){}
     public void devolverLibro(){}
+
+    @Override
+    public int compareTo(Estudiante o) {
+        return this.getNombre().compareTo(o.getNombre());
+    }
 }

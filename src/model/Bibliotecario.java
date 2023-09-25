@@ -1,6 +1,6 @@
 package model;
 
-public class Bibliotecario {
+public class Bibliotecario implements Comparable <Bibliotecario> {
 
     private String nombre;
     private String apellido;
@@ -38,4 +38,9 @@ public class Bibliotecario {
 
     public void prestarLibro( ){}
     public void recibirLibro( ){}
+
+    @Override
+    public int compareTo(Bibliotecario o) {
+        return this.getNombre().compareTo(o.getNombre());
+    }
 }
