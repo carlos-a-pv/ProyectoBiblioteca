@@ -1,16 +1,25 @@
 package model;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 public class Biblioteca {
 
     private String nombre;
 
     private HashSet<Libro> listaLibros;
+    private TreeSet<Estudiante> listaEstudiantes;
+    private ArrayList<Prestamo> listaPrestamos;
 
     public Biblioteca(String nombre) {
         this.nombre = nombre;
         listaLibros = new HashSet<>();
+        listaEstudiantes = new TreeSet<>();
+        listaPrestamos = new ArrayList<>();
+
         inicializarDatosPrueba();
     }
 
@@ -30,6 +39,11 @@ public class Biblioteca {
         getListaLibros().add(new Libro("Design Patterns: Elements of Reusable Object-Oriented Software", new Autor("Erich", "Gamma", "")));
         getListaLibros().add(new Libro("Introduction to the Theory of Computation", new Autor("Michael S.", "Sipser", "1954-")));
         getListaLibros().add(new Libro("JavaScript: The Good Parts", new Autor("Douglas", "Crockford", "1955-")));
+
+        listaEstudiantes.add(new Estudiante("carlos","perez","1004827192"));
+        getListaEstudiantes().add(new Estudiante("juan","valencia","1231231"));
+        getListaEstudiantes().add(new Estudiante("roberto","bolaños","123"));
+
     }
 
     public String getNombre() {
@@ -46,5 +60,36 @@ public class Biblioteca {
 
     public void setListaLibros(HashSet<Libro> listaLibros) {
         this.listaLibros = listaLibros;
+    }
+
+    public TreeSet<Estudiante> getListaEstudiantes() {
+        return listaEstudiantes;
+    }
+
+    public void setListaEstudiantes(TreeSet<Estudiante> listaEstudiantes) {
+        this.listaEstudiantes = listaEstudiantes;
+    }
+
+    public Estudiante buscarEstudiante(String id) {
+        Iterator<Estudiante> iterator = listaEstudiantes.iterator();
+        Estudiante estudiante = null;
+
+        while (iterator.hasNext()) {
+            Estudiante est = iterator.next();
+            if(est.getId().equals(id)){
+                estudiante = est;
+            }
+        }
+        return estudiante;
+    }
+
+    public Prestamo prestarLibro(Estudiante estudiante, Libro libro) {
+        Prestamo prestamo = null;
+        if(libro.getEstado().equals(EstadoLibro.NO_PRESTADO)){
+            prestamo = new Prestamo(new DetallePrestamo(LocalDate.now(),libro,estudiante));
+            libro.setEstado(EstadoLibro.PRESTADO);
+            listaPrestamos.add(prestamo);
+        }
+        return prestamo;
     }
 }

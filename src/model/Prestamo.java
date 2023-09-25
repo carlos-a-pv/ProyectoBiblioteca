@@ -5,9 +5,19 @@ public class Prestamo {
     private String codigo;
     private DetallePrestamo detallePrestamo;
 
-    public Prestamo(String codigo, DetallePrestamo detallePrestamo) {
-        this.codigo = codigo;
+    public Prestamo(DetallePrestamo detallePrestamo) {
+        this.codigo = crearCodigo();
         this.detallePrestamo = detallePrestamo;
+    }
+
+    private String crearCodigo() {
+        String codigo = "";
+
+        for (int i = 0; i < 3; i++) {
+            int num = (int) Math.floor(Math.random()*10);
+            codigo += String.valueOf(num);
+        }
+        return codigo;
     }
 
     public String getCodigo() {

@@ -1,6 +1,6 @@
 package model;
 
-public class Estudiante {
+public class Estudiante implements Comparable<Estudiante>{
     private String nombre;
     private String apellido;
     private String id;
@@ -10,6 +10,7 @@ public class Estudiante {
         this.apellido = apellido;
         this.id = id;
     }
+    public Estudiante(){}
 
     public String getNombre() {
         return nombre;
@@ -35,6 +36,13 @@ public class Estudiante {
         this.id = id;
     }
 
-    public void solicitarLibro(){}
-    public void devolverLibro(){}
+    @Override
+    public int compareTo(Estudiante o) {
+        if(o.nombre.compareTo(this.nombre) > 0){
+            return 1;
+        }else if(o.nombre.compareTo(this.nombre) < 0){
+            return -1;
+        }
+        return 0;
+    }
 }
