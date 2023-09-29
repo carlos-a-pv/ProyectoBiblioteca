@@ -1,10 +1,7 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Biblioteca {
 
@@ -12,13 +9,13 @@ public class Biblioteca {
 
     private HashSet<Libro> listaLibros;
     private TreeSet<Estudiante> listaEstudiantes;
-    private ArrayList<Prestamo> listaPrestamos;
+    private HashMap<String, Libro> listaPrestamos;
 
     public Biblioteca(String nombre) {
         this.nombre = nombre;
         listaLibros = new HashSet<>();
         listaEstudiantes = new TreeSet<>();
-        listaPrestamos = new ArrayList<>();
+        listaPrestamos = new HashMap<>();
 
         inicializarDatosPrueba();
     }
@@ -88,7 +85,8 @@ public class Biblioteca {
         if(libro.getEstado().equals(EstadoLibro.NO_PRESTADO)){
             prestamo = new Prestamo(new DetallePrestamo(LocalDate.now(),libro,estudiante));
             libro.setEstado(EstadoLibro.PRESTADO);
-            listaPrestamos.add(prestamo);
+            listaPrestamos.put(prestamo.getCodigo(), libro);
+            //System.out.println(listaPrestamos.get(prestamo.getCodigo()).getNombre());
         }
         return prestamo;
     }
