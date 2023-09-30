@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.*;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -11,12 +13,17 @@ public class Biblioteca {
     private String nombre;
 
     private HashSet<Libro> listaLibros;
+    private TreeSet<Estudiante> listaEstudiantes;
+    private HashMap<String, Libro> listaPrestamos;
     private HashSet<Bibliotecario> bibliotecarios;
-    private TreeSet <Estudiante> listaEstudiantes;
+
 
     public Biblioteca(String nombre) {
         this.nombre = nombre;
         listaLibros = new HashSet<>();
+        listaEstudiantes = new TreeSet<>();
+        listaPrestamos = new HashMap<>();
+
         listaEstudiantes = new TreeSet<>();
         bibliotecarios = new HashSet<>();
         inicializarDatosPrueba();
@@ -178,22 +185,30 @@ public class Biblioteca {
         return librosPrestados;
     }
 
-    public void devolverPrestamo(Libro libroSeleccionado, String codigoPrestamo) {
 
 
 
+    public Estudiante buscarEstudiante(String id) {
+        Iterator<Estudiante> iterator = listaEstudiantes.iterator();
+        Estudiante estudiante = null;
+
+        while (iterator.hasNext()) {
+            Estudiante est = iterator.next();
+            if(est.getId().equals(id)){
+                estudiante = est;
+            }
+        }
+        return estudiante;
     }
 
-
-    public void buscarEstudiante(String mensaje, Libro libroSeleccionado) {
-        Iterator<Estudiante> estudianteIterator = listaEstudiantes.iterator();
-        while (estudianteIterator.hasNext()){
-            Estudiante estudiante = estudianteIterator.next();
-            if (estudiante.getId().equals(mensaje)){
-                estudiante.solicitarLibro(estudiante,libroSeleccionado);
-            }
-
+    public Prestamo prestarLibro(Estudiante estudiante, Libro libro) {
+        Prestamo prestamo = null;
+        if(libro.getEstado().equals(EstadoLibro.NO_PRESTADO)){
+            prestamo = new Prestamo(new DetallePrestamo(LocalDate.now(),libro,estudiante));
+            libro.setEstado(EstadoLibro.PRESTADO);
+            listaPrestamos.put(prestamo.getCodigo(), libro);
+            //System.out.println(listaPrestamos.get(prestamo.getCodigo()).getNombre());
         }
-
+        return prestamo;
     }
 }

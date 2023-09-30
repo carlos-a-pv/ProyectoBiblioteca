@@ -37,17 +37,13 @@ public class Estudiante implements Comparable <Estudiante> {
         this.id = id;
     }
 
-    public void solicitarLibro(Estudiante estudiante,Libro libroSeleccionado){
-    Prestamo prestamo = new Prestamo(new DetallePrestamo(LocalDate.now(),libroSeleccionado,Estudiante.this));
-    libroSeleccionado.setEstado(EstadoLibro.PRESTADO);
-    }
-    public void devolverLibro(Libro libroSeleccionado){
-
-
-    }
-
     @Override
     public int compareTo(Estudiante o) {
-        return this.getNombre().compareTo(o.getNombre());
+        if(o.nombre.compareTo(this.nombre) > 0){
+            return 1;
+        }else if(o.nombre.compareTo(this.nombre) < 0){
+            return -1;
+        }
+        return 0;
     }
 }
