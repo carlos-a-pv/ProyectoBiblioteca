@@ -36,7 +36,13 @@ public class PrincipalViewController {
 
     }
 
-    public void onClickDevolucion() {
+    public void onClickDevolucion() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(PrincipalViewController.class.getResource("../view/devolucion-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 700, 500);
+        Stage stage = new Stage();
+        stage.setTitle("Devolución");
+        stage.setScene(scene);
 
+        stage.show();
     }
 }

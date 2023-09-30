@@ -9,13 +9,14 @@ public class Libro {
     private String nombre;
     private LocalDate fechaPublicacion;
     private Tema temario;
+
     private EstadoLibro estado;
 
     public Libro(String nombre, Autor autor){
         this.nombre = nombre;
         this.autor = autor;
         this.fechaPublicacion = LocalDate.now();
-        this.estado = EstadoLibro.NO_PRESTADO;
+        this.estado = EstadoLibro.PRESTADO;
     }
 
     public Autor getAutor() {

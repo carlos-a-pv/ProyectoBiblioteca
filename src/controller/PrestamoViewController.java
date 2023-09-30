@@ -96,7 +96,7 @@ public class PrestamoViewController {
 
             btnGuardar.setOnMouseClicked(event -> {
                 String mensaje = textField.getText();
-                //INSTANCE.getModel().buscarEstudiante(mensaje);
+                INSTANCE.getModel().buscarEstudiante(mensaje,libroSeleccionado);
             });
         }else{
             mostrarMensaje("","ADVERTENCIA","Seleccione un libro para prestar", Alert.AlertType.WARNING);
@@ -141,4 +141,5 @@ public class PrestamoViewController {
             return false;
         }
     }
+
 }

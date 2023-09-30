@@ -112,7 +112,7 @@ public class CrudBibliotecario {
 
     @FXML
     void OnCrearBibliotecarioClick(ActionEvent event) {
-        if (datosValidos(tfNombre.getText(),tfApellido.getText(),tfId.getText()));{
+        if (datosValidos(tfNombre.getText(),tfApellido.getText(),tfId.getText())){
             Bibliotecario bibliotecario = new Bibliotecario(tfNombre.getText(),tfApellido.getText(),tfId.getText());
             INSTANCE.getModel().añadirBibliotecario(bibliotecario);
             limpiarCampos();
@@ -176,7 +176,7 @@ public class CrudBibliotecario {
         if(mensaje.equals("")){
             return true;
         }else{
-            mostrarMensaje("Notificación cliente","Datos invalidos",mensaje, Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación Bibliotecario","Datos invalidos",mensaje, Alert.AlertType.WARNING);
             return false;
         }
     }

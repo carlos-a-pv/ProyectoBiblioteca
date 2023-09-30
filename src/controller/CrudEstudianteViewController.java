@@ -10,6 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import model.Bibliotecario;
 import model.Estudiante;
@@ -55,8 +62,12 @@ public class CrudEstudianteViewController {
 
     @FXML
     private TextField tfNombre;
+    @FXML
+    private AnchorPane estudianteView;
+
 
     Estudiante estudianteSeleccionado;
+
 
     @FXML
     void OnActualizarEstudianteClick(ActionEvent event) {
@@ -108,13 +119,15 @@ public class CrudEstudianteViewController {
 
     @FXML
     void OnCrearEstudianteClick(ActionEvent event) {
-        if (datosValidos(tfNombre.getText(),tfApellido.getText(),tfId.getText()));{
+        if (datosValidos(tfNombre.getText(),tfApellido.getText(),tfId.getText())){
         Estudiante estudiante = new Estudiante(tfNombre.getText(),tfApellido.getText(),tfId.getText());
         INSTANCE.getModel().añadirEstudiante(estudiante);
         limpiarCampos();
         mostrarMensaje("Información","El estudiante ha sido creado","", Alert.AlertType.INFORMATION);
         tbEstudiantes.setItems(FXCollections.observableArrayList(INSTANCE.getModel().getListaEstudiantes()));
         tbEstudiantes.refresh();
+        }else {
+            mostrarMensaje("Notificación Estudiante","Datos invalidos","El estudiante no ha sido creado", Alert.AlertType.WARNING);
         }
     }
 
@@ -147,7 +160,13 @@ public class CrudEstudianteViewController {
 
     @FXML
     void initialize() {
-
+        LinearGradient paint = new LinearGradient(
+        0.2227, 0.1422, 1.0, 1.0, true, CycleMethod.NO_CYCLE,
+        new Stop(0.0, new Color(0.0195, 0.39, 0.0998, 0.9442)),
+        new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
+        Color paintBtn = new Color(0.0044, 0.4737, 0.0279, 1.0);
+        btnCrear.setBackground(new Background(new BackgroundFill(paintBtn,null,null)));
+        estudianteView.setBackground(new Background(new BackgroundFill(paint,null,null)));
         tbEstudiantes.setItems(getListaEstudiantesData());
         this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
@@ -187,7 +206,7 @@ public class CrudEstudianteViewController {
         if(mensaje.equals("")){
             return true;
         }else{
-            mostrarMensaje("Notificación cliente","Datos invalidos",mensaje, Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación Estudiante","Datos invalidos",mensaje, Alert.AlertType.WARNING);
             return false;
         }
     }

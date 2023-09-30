@@ -1,6 +1,8 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.TreeSet;
 import java.util.stream.Stream;
 
@@ -36,6 +38,7 @@ public class Biblioteca {
         getListaLibros().add(new Libro("Design Patterns: Elements of Reusable Object-Oriented Software", new Autor("Erich", "Gamma", "")));
         getListaLibros().add(new Libro("Introduction to the Theory of Computation", new Autor("Michael S.", "Sipser", "1954-")));
         getListaLibros().add(new Libro("JavaScript: The Good Parts", new Autor("Douglas", "Crockford", "1955-")));
+
 
         // Inicializar Estudiantes
         getListaEstudiantes().add(new Estudiante("Juan", "Pérez", "12345"));
@@ -90,6 +93,7 @@ public class Biblioteca {
         Estudiante estudiante1 = listaEstudiantes.stream().filter(estudiante2 -> estudiante2.getNombre().equals(estudiante.getNombre())).findFirst().orElse(null);
         if (estudiante1 == null){
             listaEstudiantes.add(estudiante);
+
         }
     }
 
@@ -158,6 +162,37 @@ public class Biblioteca {
         }
         else {
             return  false;
+        }
+
+    }
+
+    public HashSet <Libro> getListaLibrosPrestados() {
+        Iterator<Libro> libroIterator = listaLibros.iterator();
+        HashSet<Libro> librosPrestados = new HashSet<>();
+        while (libroIterator.hasNext()){
+            Libro libro = libroIterator.next();
+            if (libro.getEstado()== EstadoLibro.PRESTADO){
+                librosPrestados.add(libro);
+            }
+        }
+        return librosPrestados;
+    }
+
+    public void devolverPrestamo(Libro libroSeleccionado, String codigoPrestamo) {
+
+
+
+    }
+
+
+    public void buscarEstudiante(String mensaje, Libro libroSeleccionado) {
+        Iterator<Estudiante> estudianteIterator = listaEstudiantes.iterator();
+        while (estudianteIterator.hasNext()){
+            Estudiante estudiante = estudianteIterator.next();
+            if (estudiante.getId().equals(mensaje)){
+                estudiante.solicitarLibro(estudiante,libroSeleccionado);
+            }
+
         }
 
     }

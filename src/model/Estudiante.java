@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Estudiante implements Comparable <Estudiante> {
     private String nombre;
     private String apellido;
@@ -35,8 +37,14 @@ public class Estudiante implements Comparable <Estudiante> {
         this.id = id;
     }
 
-    public void solicitarLibro(){}
-    public void devolverLibro(){}
+    public void solicitarLibro(Estudiante estudiante,Libro libroSeleccionado){
+    Prestamo prestamo = new Prestamo(new DetallePrestamo(LocalDate.now(),libroSeleccionado,Estudiante.this));
+    libroSeleccionado.setEstado(EstadoLibro.PRESTADO);
+    }
+    public void devolverLibro(Libro libroSeleccionado){
+
+
+    }
 
     @Override
     public int compareTo(Estudiante o) {

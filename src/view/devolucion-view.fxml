@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="492.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DevolucionViewController">
+   <children>
+      <TableView fx:id="tbLibros" layoutX="38.0" layoutY="79.0" prefHeight="306.0" prefWidth="655.0">
+         <columns>
+            <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
+            <TableColumn fx:id="colAutor" prefWidth="113.0" text="Autor" />
+            <TableColumn fx:id="colFechaPublicacion" prefWidth="142.0" text="Fecha Publicacion" />
+            <TableColumn fx:id="colEstado" prefWidth="164.0" text="Estado" />
+            <TableColumn fx:id="colEstudianteAsociado" prefWidth="164.0" text="Estudiante" />
+         </columns>
+      </TableView>
+      <Text fill="#229a3a" layoutX="254.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema De Devolución">
+         <font>
+            <Font name="Segoe UI Black" size="19.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnDevolver" layoutX="327.0" layoutY="401.0" mnemonicParsing="false" onAction="#onClickDevolver" prefHeight="25.0" prefWidth="77.0" text="Devolver" />
+   </children>
+</AnchorPane>
