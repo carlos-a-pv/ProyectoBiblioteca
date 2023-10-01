@@ -1,15 +1,23 @@
 package model;
 
-import java.util.Random;
-
 public class Prestamo {
 
     private String codigo;
     private DetallePrestamo detallePrestamo;
 
-    public Prestamo( DetallePrestamo detallePrestamo) {
-        this.codigo = String.valueOf(Math.random()*100+1);
+    public Prestamo(DetallePrestamo detallePrestamo) {
+        this.codigo = crearCodigo();
         this.detallePrestamo = detallePrestamo;
+    }
+
+    private String crearCodigo() {
+        String codigo = "";
+
+        for (int i = 0; i < 3; i++) {
+            int num = (int) Math.floor(Math.random()*10);
+            codigo += String.valueOf(num);
+        }
+        return codigo;
     }
 
     public String getCodigo() {

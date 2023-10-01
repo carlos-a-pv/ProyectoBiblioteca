@@ -49,10 +49,13 @@ public class Estudiante implements Comparable <Estudiante> {
         this.id = id;
     }
 
-
-
     @Override
     public int compareTo(Estudiante o) {
-        return this.getNombre().compareTo(o.getNombre());
+        if(o.nombre.compareTo(this.nombre) > 0){
+            return 1;
+        }else if(o.nombre.compareTo(this.nombre) < 0){
+            return -1;
+        }
+        return 0;
     }
 }

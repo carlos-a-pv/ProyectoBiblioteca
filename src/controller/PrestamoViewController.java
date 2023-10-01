@@ -8,15 +8,17 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Autor;
-import model.EstadoLibro;
-import model.Libro;
+import model.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.Optional;
@@ -95,28 +97,28 @@ public class PrestamoViewController {
             });
 
             btnGuardar.setOnMouseClicked(event -> {
-                String mensaje = textField.getText();
-                INSTANCE.getModel().buscarEstudiante(mensaje,libroSeleccionado);
+                String id = textField.getText();
+                if(!id.equals("")){
+                    Estudiante estudiante = INSTANCE.getModel().buscarEstudiante(id);
+                    if(estudiante != null){
+                        Prestamo prestamo = INSTANCE.getModel().prestarLibro(estudiante, libroSeleccionado);
+                        if(prestamo != null){
+                            mostrarMensaje("INFO","INFO","Libro prestado correctamente, recuerda el numero: "+prestamo.getCodigo()+" para la devolucion del libro", Alert.AlertType.INFORMATION);
+                            tbLibros.refresh();
+                            tbLibros.setItems(getListaLibros());
+                            dialog.close();
+                        }else{
+                            mostrarMensaje("ADVERTENCIA", "ADVERTENCIA", "El libro ya esta prestado", Alert.AlertType.WARNING);
+                            dialog.close();
+                        }
+                    }else{
+                        mostrarMensaje("ERROR","No se ha encontrado un estudiante, registrese primero","", Alert.AlertType.ERROR);
+                        dialog.close();
+                    }
+                }
             });
         }else{
             mostrarMensaje("","ADVERTENCIA","Seleccione un libro para prestar", Alert.AlertType.WARNING);
-        }
-    }
-
-    public void onClickBuscar(ActionEvent actionEvent) {
-        String filtro = cbFiltro.getValue();
-        if(filtro != null){
-            if(filtro.equals("Nombre")){
-                //INSTANCE.getModel().ordenarPornombre();
-            }else if( filtro.equals("Autor")){
-                //INSTANCE.getModel().ordenarPornombre();
-            }else if(filtro.equals("Fecha de Publicacion")){
-                //INSTANCE.getModel().ordenarPorFecha();
-            }else{
-                //INSTANCE.getModel().ordenarPorEstado();
-            }
-        }else{
-            mostrarMensaje("INFO","INFO","Elija un filtro", Alert.AlertType.INFORMATION);
         }
     }
 
@@ -141,5 +143,4 @@ public class PrestamoViewController {
             return false;
         }
     }
-
 }
