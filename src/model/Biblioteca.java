@@ -185,15 +185,15 @@ public class Biblioteca {
     }
 
 
-    public void buscarEstudiante(String mensaje, Libro libroSeleccionado) {
+    public Estudiante buscarEstudiante(String mensaje, Libro libroSeleccionado) {
         Iterator<Estudiante> estudianteIterator = listaEstudiantes.iterator();
         while (estudianteIterator.hasNext()){
             Estudiante estudiante = estudianteIterator.next();
             if (estudiante.getId().equals(mensaje)){
-                estudiante.solicitarLibro(estudiante,libroSeleccionado);
+                return estudiante;
             }
 
         }
-
+    return null;
     }
 }

@@ -1,16 +1,28 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 public class Estudiante implements Comparable <Estudiante> {
     private String nombre;
     private String apellido;
     private String id;
+    private HashSet <Libro> librosPrestados;
+
+
+    public HashSet<Libro> getLibrosPrestados() {
+        return librosPrestados;
+    }
+
+    public void setLibrosPrestados(HashSet<Libro> librosPrestados) {
+        this.librosPrestados = librosPrestados;
+    }
 
     public Estudiante(String nombre, String apellido, String id) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.id = id;
+        librosPrestados = new HashSet<>();
     }
 
     public String getNombre() {
@@ -37,14 +49,7 @@ public class Estudiante implements Comparable <Estudiante> {
         this.id = id;
     }
 
-    public void solicitarLibro(Estudiante estudiante,Libro libroSeleccionado){
-    Prestamo prestamo = new Prestamo(new DetallePrestamo(LocalDate.now(),libroSeleccionado,Estudiante.this));
-    libroSeleccionado.setEstado(EstadoLibro.PRESTADO);
-    }
-    public void devolverLibro(Libro libroSeleccionado){
 
-
-    }
 
     @Override
     public int compareTo(Estudiante o) {

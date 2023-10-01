@@ -8,12 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Autor;
 import model.EstadoLibro;
+import model.Estudiante;
 import model.Libro;
 
 import static controller.AppController.INSTANCE;
@@ -28,7 +27,14 @@ public class DevolucionViewController {
 
     @FXML
     private Button btnDevolver;
-
+    @FXML
+    private MenuButton menuBtn;
+    @FXML
+    private MenuItem btnBuscarId;
+    @FXML
+    private MenuItem btnBuscarCodigo;
+    @FXML
+    private TextField tfId;
     @FXML
     private TableView<Libro> tbLibros;
     @FXML
@@ -50,12 +56,10 @@ public class DevolucionViewController {
 
     }
 
+
+
     @FXML
     void initialize() {
-        this.colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        this.colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
-        this.colFechaPublicacion.setCellValueFactory(new PropertyValueFactory<>("fechaPublicacion"));
-        this.colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
 
         tbLibros.setItems(getListaLibrosPrestados());
 
@@ -70,4 +74,36 @@ public class DevolucionViewController {
         return listaLibrosData;
     }
 
+    public void onBuscarId(ActionEvent actionEvent) {
+
+        String id = tfId.getText();
+        Estudiante estudiante = INSTANCE.getModel().buscarEstudiante(id,libroSeleccionado);
+        if (estudiante!=null){
+            if (estudiante.getLibrosPrestados()!=null){
+                tbLibros.setItems(listaLibrosData);
+                this.colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+                this.colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
+                this.colEstado.setCellValueFactory(new  PropertyValueFactory<>("estado"));
+                tbLibros.refresh();
+            }
+            else {
+                mostrarMensaje("Información Libro","","El estudiante no tiene libros prestados", Alert.AlertType.INFORMATION);
+            }
+
+        }
+        else {
+            mostrarMensaje("información libro","","no existe este estudiante en el sistema", Alert.AlertType.WARNING);
+        }
+    }
+
+    public void onBuscarCodigo(ActionEvent actionEvent) {
+    }
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+
+        Alert aler = new Alert(alertType);
+        aler.setTitle(titulo);
+        aler.setHeaderText(header);
+        aler.setContentText(contenido);
+        aler.showAndWait();
+    }
 }
