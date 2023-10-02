@@ -31,20 +31,20 @@ public class Biblioteca {
 
     private void inicializarDatosPrueba() {
         getListaLibros().add(new Libro("Cien años de soledad", new Autor("Gabriel", "García Márquez", "1927-2014"),Tema.ACCION));
-        getListaLibros().add(new Libro("1984", new Autor("George", "Orwell", "1903-1950"),Tema.ACCION));
-        getListaLibros().add(new Libro("Matar un ruiseñor", new Autor("Harper", "Lee", "1926-2016"),Tema.ACCION));
-        getListaLibros().add(new Libro("El Gran Gatsby", new Autor("F. Scott", "Fitzgerald", "1896-1940"),Tema.ACCION));
-        getListaLibros().add(new Libro("El señor de los anillos", new Autor("J.R.R.", "Tolkien", "1892-1973"),Tema.ACCION));
-        getListaLibros().add(new Libro("En busca del tiempo perdido", new Autor("Marcel", "Proust", "1871-1922"),Tema.ACCION));
-        getListaLibros().add(new Libro("Don Quijote de la Mancha", new Autor("Miguel de", "Cervantes", "1547-1616"),Tema.ACCION));
-        getListaLibros().add(new Libro("Crimen y castigo", new Autor("Fiodor", "Dostoievski", "1821-1881"),Tema.ACCION));
-        getListaLibros().add(new Libro("Moby Dick", new Autor("Herman", "Melville", "1819-1891"),Tema.ACCION));
-        getListaLibros().add(new Libro("Orgullo y prejuicio", new Autor("Jane", "Austen", "1775-1817"),Tema.ACCION));
-        getListaLibros().add(new Libro("Clean Code: A Handbook of Agile Software Craftsmanship", new Autor("Robert C.", "Martin", "1952-"),Tema.ACCION));
+        getListaLibros().add(new Libro("1984", new Autor("George", "Orwell", "1903-1950"),Tema.NOVELA));
+        getListaLibros().add(new Libro("Matar un ruiseñor", new Autor("Harper", "Lee", "1926-2016"),Tema.COMEDIA));
+        getListaLibros().add(new Libro("El Gran Gatsby", new Autor("F. Scott", "Fitzgerald", "1896-1940"),Tema.POESIA));
+        getListaLibros().add(new Libro("El señor de los anillos", new Autor("J.R.R.", "Tolkien", "1892-1973"),Tema.COMEDIA));
+        getListaLibros().add(new Libro("En busca del tiempo perdido", new Autor("Marcel", "Proust", "1871-1922"),Tema.ROMANCE));
+        getListaLibros().add(new Libro("Don Quijote de la Mancha", new Autor("Miguel de", "Cervantes", "1547-1616"),Tema.TERROR));
+        getListaLibros().add(new Libro("Crimen y castigo", new Autor("Fiodor", "Dostoievski", "1821-1881"),Tema.COMEDIA));
+        getListaLibros().add(new Libro("Moby Dick", new Autor("Herman", "Melville", "1819-1891"),Tema.ROMANCE));
+        getListaLibros().add(new Libro("Orgullo y prejuicio", new Autor("Jane", "Austen", "1775-1817"),Tema.NOVELA));
+        getListaLibros().add(new Libro("Clean Code: A Handbook of Agile Software Craftsmanship", new Autor("Robert C.", "Martin", "1952-"),Tema.COMEDIA));
         getListaLibros().add(new Libro("The Pragmatic Programmer: Your Journey to Mastery", new Autor("Andrew", "Hunt", ""),Tema.ACCION));
         getListaLibros().add(new Libro("Design Patterns: Elements of Reusable Object-Oriented Software", new Autor("Erich", "Gamma", ""),Tema.ACCION));
-        getListaLibros().add(new Libro("Introduction to the Theory of Computation", new Autor("Michael S.", "Sipser", "1954-"),Tema.ACCION));
-        getListaLibros().add(new Libro("JavaScript: The Good Parts", new Autor("Douglas", "Crockford", "1955-"),Tema.ACCION));
+        getListaLibros().add(new Libro("Introduction to the Theory of Computation", new Autor("Michael S.", "Sipser", "1954-"),Tema.ROMANCE));
+        getListaLibros().add(new Libro("JavaScript: The Good Parts", new Autor("Douglas", "Crockford", "1955-"),Tema.TERROR));
 
         // Inicializar Estudiantes
         getListaEstudiantes().add(new Estudiante("Jhojan", "Gil", "1234"));
