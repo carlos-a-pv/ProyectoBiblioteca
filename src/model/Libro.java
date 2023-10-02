@@ -12,11 +12,12 @@ public class Libro {
 
     private EstadoLibro estado;
 
-    public Libro(String nombre, Autor autor){
+    public Libro(String nombre, Autor autor,Tema temario){
         this.nombre = nombre;
         this.autor = autor;
+        this.temario = temario;
         this.fechaPublicacion = LocalDate.now();
-        this.estado = EstadoLibro.PRESTADO;
+        this.estado = EstadoLibro.NO_PRESTADO;
     }
 
     public Autor getAutor() {

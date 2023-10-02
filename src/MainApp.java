@@ -13,7 +13,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("./view/principal-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 700);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
         stage.setTitle("BIBLIOTECA UNIQUINDIO");
         stage.setScene(scene);
         stage.show();

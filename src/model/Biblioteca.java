@@ -1,5 +1,7 @@
 package model;
 
+import javafx.collections.ObservableList;
+
 import java.time.LocalDate;
 import java.util.*;
 import java.time.LocalDate;
@@ -14,41 +16,38 @@ public class Biblioteca {
 
     private HashSet<Libro> listaLibros;
     private TreeSet<Estudiante> listaEstudiantes;
-    private HashMap<String, Libro> listaPrestamos;
+    private HashMap<String, Prestamo> listaPrestamos;
     private HashSet<Bibliotecario> bibliotecarios;
 
 
     public Biblioteca(String nombre) {
         this.nombre = nombre;
         listaLibros = new HashSet<>();
-        listaEstudiantes = new TreeSet<>();
         listaPrestamos = new HashMap<>();
-
         listaEstudiantes = new TreeSet<>();
         bibliotecarios = new HashSet<>();
         inicializarDatosPrueba();
     }
 
     private void inicializarDatosPrueba() {
-        getListaLibros().add(new Libro("Cien años de soledad", new Autor("Gabriel", "García Márquez", "1927-2014")));
-        getListaLibros().add(new Libro("1984", new Autor("George", "Orwell", "1903-1950")));
-        getListaLibros().add(new Libro("Matar un ruiseñor", new Autor("Harper", "Lee", "1926-2016")));
-        getListaLibros().add(new Libro("El Gran Gatsby", new Autor("F. Scott", "Fitzgerald", "1896-1940")));
-        getListaLibros().add(new Libro("El señor de los anillos", new Autor("J.R.R.", "Tolkien", "1892-1973")));
-        getListaLibros().add(new Libro("En busca del tiempo perdido", new Autor("Marcel", "Proust", "1871-1922")));
-        getListaLibros().add(new Libro("Don Quijote de la Mancha", new Autor("Miguel de", "Cervantes", "1547-1616")));
-        getListaLibros().add(new Libro("Crimen y castigo", new Autor("Fiodor", "Dostoievski", "1821-1881")));
-        getListaLibros().add(new Libro("Moby Dick", new Autor("Herman", "Melville", "1819-1891")));
-        getListaLibros().add(new Libro("Orgullo y prejuicio", new Autor("Jane", "Austen", "1775-1817")));
-        getListaLibros().add(new Libro("Clean Code: A Handbook of Agile Software Craftsmanship", new Autor("Robert C.", "Martin", "1952-")));
-        getListaLibros().add(new Libro("The Pragmatic Programmer: Your Journey to Mastery", new Autor("Andrew", "Hunt", "")));
-        getListaLibros().add(new Libro("Design Patterns: Elements of Reusable Object-Oriented Software", new Autor("Erich", "Gamma", "")));
-        getListaLibros().add(new Libro("Introduction to the Theory of Computation", new Autor("Michael S.", "Sipser", "1954-")));
-        getListaLibros().add(new Libro("JavaScript: The Good Parts", new Autor("Douglas", "Crockford", "1955-")));
-
+        getListaLibros().add(new Libro("Cien años de soledad", new Autor("Gabriel", "García Márquez", "1927-2014"),Tema.ACCION));
+        getListaLibros().add(new Libro("1984", new Autor("George", "Orwell", "1903-1950"),Tema.ACCION));
+        getListaLibros().add(new Libro("Matar un ruiseñor", new Autor("Harper", "Lee", "1926-2016"),Tema.ACCION));
+        getListaLibros().add(new Libro("El Gran Gatsby", new Autor("F. Scott", "Fitzgerald", "1896-1940"),Tema.ACCION));
+        getListaLibros().add(new Libro("El señor de los anillos", new Autor("J.R.R.", "Tolkien", "1892-1973"),Tema.ACCION));
+        getListaLibros().add(new Libro("En busca del tiempo perdido", new Autor("Marcel", "Proust", "1871-1922"),Tema.ACCION));
+        getListaLibros().add(new Libro("Don Quijote de la Mancha", new Autor("Miguel de", "Cervantes", "1547-1616"),Tema.ACCION));
+        getListaLibros().add(new Libro("Crimen y castigo", new Autor("Fiodor", "Dostoievski", "1821-1881"),Tema.ACCION));
+        getListaLibros().add(new Libro("Moby Dick", new Autor("Herman", "Melville", "1819-1891"),Tema.ACCION));
+        getListaLibros().add(new Libro("Orgullo y prejuicio", new Autor("Jane", "Austen", "1775-1817"),Tema.ACCION));
+        getListaLibros().add(new Libro("Clean Code: A Handbook of Agile Software Craftsmanship", new Autor("Robert C.", "Martin", "1952-"),Tema.ACCION));
+        getListaLibros().add(new Libro("The Pragmatic Programmer: Your Journey to Mastery", new Autor("Andrew", "Hunt", ""),Tema.ACCION));
+        getListaLibros().add(new Libro("Design Patterns: Elements of Reusable Object-Oriented Software", new Autor("Erich", "Gamma", ""),Tema.ACCION));
+        getListaLibros().add(new Libro("Introduction to the Theory of Computation", new Autor("Michael S.", "Sipser", "1954-"),Tema.ACCION));
+        getListaLibros().add(new Libro("JavaScript: The Good Parts", new Autor("Douglas", "Crockford", "1955-"),Tema.ACCION));
 
         // Inicializar Estudiantes
-        getListaEstudiantes().add(new Estudiante("Juan", "Pérez", "12345"));
+        getListaEstudiantes().add(new Estudiante("Jhojan", "Gil", "1234"));
         getListaEstudiantes().add(new Estudiante("María", "Gómez", "67890"));
         getListaEstudiantes().add(new Estudiante("Carlos", "López", "54321"));
         getListaEstudiantes().add(new Estudiante("Ana", "Martínez", "98765"));
@@ -97,38 +96,38 @@ public class Biblioteca {
     }
 
     public void añadirEstudiante(Estudiante estudiante) {
-        Estudiante estudiante1 = listaEstudiantes.stream().filter(estudiante2 -> estudiante2.getNombre().equals(estudiante.getNombre())).findFirst().orElse(null);
-        if (estudiante1 == null){
-            listaEstudiantes.add(estudiante);
+        listaEstudiantes.add(estudiante);
+    }
 
+    public boolean actualizarEstudiante(String idBusqueda, String nombre, String apellido, String id) {
+
+        Iterator<Estudiante> estudianteIterator = listaEstudiantes.iterator();
+
+        while (estudianteIterator.hasNext()){
+            Estudiante estudiante = estudianteIterator.next();
+            if (estudiante.getId().equals(idBusqueda)){
+                estudiante.setNombre(nombre);
+                estudiante.setApellido(apellido);
+                estudiante.setId(id);
+                return true;
+            }
         }
-    }
-
-    public boolean actualizarEstudiante(String id, String nombre, String apellido, String id1) {
-    Estudiante estudianteSeleccionado = listaEstudiantes.stream().filter(estudiante -> estudiante.getId().equals(id)).findFirst().orElse(null);
-
-
-    if (estudianteSeleccionado != null){
-        estudianteSeleccionado.setNombre(nombre);
-        estudianteSeleccionado.setApellido(apellido);
-        estudianteSeleccionado.setId(id1);
-        return true;
-    }
-    else {
-        return  false;
-    }
+        return false;
 
     }
 
     public boolean eliminarEstudiante(Estudiante estudianteSeleccionado) {
-        if (estudianteSeleccionado != null&& listaEstudiantes.stream().filter(estudiante -> estudiante.getId().equals(estudianteSeleccionado.getId())).findFirst().orElse(null)!= null){
-            listaEstudiantes.remove(estudianteSeleccionado);
 
-            return true;
+        Iterator<Estudiante> estudianteIterator = listaEstudiantes.iterator();
+
+        while (estudianteIterator.hasNext()){
+            Estudiante estudiante = estudianteIterator.next();
+            if (estudiante.getId().equals(estudianteSeleccionado.getId())){
+                listaEstudiantes.remove(estudiante);
+                return true;
+            }
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     public HashSet<Bibliotecario> getBibliotecarios() {
@@ -140,58 +139,43 @@ public class Biblioteca {
     }
 
     public boolean eliminarBibliotecario(Bibliotecario bibliotecarioSeleccionado) {
-        if (bibliotecarioSeleccionado != null&& bibliotecarios.stream().filter(estudiante -> estudiante.getId().equals(bibliotecarioSeleccionado.getId())).findFirst().orElse(null)!= null){
-            bibliotecarios.remove(bibliotecarioSeleccionado);
+        Iterator<Bibliotecario> bibliotecarioIterator = bibliotecarios.iterator();
 
-            return true;
+        while (bibliotecarioIterator.hasNext()){
+            Bibliotecario bibliotecario = bibliotecarioIterator.next();
+            if (bibliotecario.getId().equals(bibliotecarioSeleccionado.getId())){
+                bibliotecarios.remove(bibliotecario);
+                return true;
+            }
         }
-        else {
-            return false;
-        }
+        return false;
     }
 
     public void añadirBibliotecario(Bibliotecario bibliotecario) {
-        Bibliotecario bibliotecario1 = this.bibliotecarios.stream().filter(estudiante2 -> estudiante2.getNombre().equals(bibliotecario.getNombre())).findFirst().orElse(null);
-        if (bibliotecario1 == null){
-            bibliotecarios.add(bibliotecario);
-        }
+        bibliotecarios.add(bibliotecario);
     }
 
-    public boolean actualizarBibliotecario(String id, String nombre, String apellido, String id1) {
-        Bibliotecario bibliotecarioSeleccionado = bibliotecarios.stream().filter(estudiante -> estudiante.getId().equals(id)).findFirst().orElse(null);
+    public boolean actualizarBibliotecario(String idBusqueda, String nombre, String apellido, String id) {
 
+        Iterator<Bibliotecario> bibliotecarioIterator = bibliotecarios.iterator();
 
-        if (bibliotecarioSeleccionado != null){
-            bibliotecarioSeleccionado.setNombre(nombre);
-            bibliotecarioSeleccionado.setApellido(apellido);
-            bibliotecarioSeleccionado.setId(id1);
-            return true;
-        }
-        else {
-            return  false;
-        }
-
-    }
-
-    public HashSet <Libro> getListaLibrosPrestados() {
-        Iterator<Libro> libroIterator = listaLibros.iterator();
-        HashSet<Libro> librosPrestados = new HashSet<>();
-        while (libroIterator.hasNext()){
-            Libro libro = libroIterator.next();
-            if (libro.getEstado()== EstadoLibro.PRESTADO){
-                librosPrestados.add(libro);
+        while (bibliotecarioIterator.hasNext()){
+            Bibliotecario bibliotecario = bibliotecarioIterator.next();
+            if (bibliotecario.getId().equals(idBusqueda)){
+                bibliotecario.setNombre(nombre);
+                bibliotecario.setApellido(apellido);
+                bibliotecario.setId(id);
+                return true;
             }
         }
-        return librosPrestados;
+        return false;
     }
 
-    public void devolverPrestamo(Libro libroSeleccionado, String codigoPrestamo) {
 
 
     public Estudiante buscarEstudiante(String id) {
         Iterator<Estudiante> iterator = listaEstudiantes.iterator();
         Estudiante estudiante = null;
-
         while (iterator.hasNext()) {
             Estudiante est = iterator.next();
             if(est.getId().equals(id)){
@@ -200,26 +184,167 @@ public class Biblioteca {
         }
         return estudiante;
     }
-    }
 
 
-    public Estudiante buscarEstudiante(String mensaje, Libro libroSeleccionado) {
-        Iterator<Estudiante> estudianteIterator = listaEstudiantes.iterator();
-        while (estudianteIterator.hasNext()){
-            Estudiante estudiante = estudianteIterator.next();
-            if (estudiante.getId().equals(mensaje)){
-                return estudiante;
-            }
 
     public Prestamo prestarLibro(Estudiante estudiante, Libro libro) {
-        Prestamo prestamo = null;
-        if(libro.getEstado().equals(EstadoLibro.NO_PRESTADO)){
-            prestamo = new Prestamo(new DetallePrestamo(LocalDate.now(),libro,estudiante));
-            libro.setEstado(EstadoLibro.PRESTADO);
-            listaPrestamos.put(prestamo.getCodigo(), libro);
-            //System.out.println(listaPrestamos.get(prestamo.getCodigo()).getNombre());
-        }
-        return prestamo;
-    return null;
+            Prestamo prestamo = null;
+            if(libro.getEstado().equals(EstadoLibro.NO_PRESTADO)){
+                prestamo = new Prestamo(new DetallePrestamo(LocalDate.now(),libro,estudiante));
+                libro.setEstado(EstadoLibro.PRESTADO);
+                listaPrestamos.put(prestamo.getCodigo(), prestamo);
+                //System.out.println(listaPrestamos.get(prestamo.getCodigo()).getNombre());
+            }
+            return prestamo;
+
     }
+
+    public Prestamo buscarPrestamo(String id) {
+        Iterator<Map.Entry<String, Prestamo>> listIterator = listaPrestamos.entrySet().iterator();
+
+        while (listIterator.hasNext()){
+            Map.Entry<String, Prestamo> entry = listIterator.next();
+            String key = entry.getKey();
+            if (key.equals(id)){
+               Prestamo prestamo = entry.getValue();
+                return prestamo;
+            }
+
+        }
+
+        return null;
+    }
+
+    public void devolverLibro(Libro libro,Estudiante estudiante) {
+
+        Iterator<Map.Entry<String, Prestamo>> listIterator = listaPrestamos.entrySet().iterator();
+
+        while (listIterator.hasNext()){
+            Map.Entry<String, Prestamo> entry = listIterator.next();
+            String key = entry.getKey();
+            Prestamo value = entry.getValue();
+            if (value.getDetallePrestamo().getLibroPrestado().getNombre().equals(libro.getNombre()));{
+                listaPrestamos.remove(value,key);
+                libro.setEstado(EstadoLibro.NO_PRESTADO);
+            }
+        }
+    }
+
+    public HashSet<Libro> buscarPrestamoEstudiante(Estudiante estudiante) {
+
+        Iterator<Map.Entry<String, Prestamo>> listIterator = listaPrestamos.entrySet().iterator();
+        HashSet<Libro> libroEstudiante = new HashSet<>();
+
+        while (listIterator.hasNext()){
+            Map.Entry<String, Prestamo> entry = listIterator.next();
+            Prestamo prestamo = entry.getValue();
+            if (prestamo.getDetallePrestamo().getEstudiante()==estudiante&&prestamo.getDetallePrestamo().getLibroPrestado().getEstado()==EstadoLibro.PRESTADO){
+                libroEstudiante.add(prestamo.getDetallePrestamo().getLibroPrestado());
+            }
+        }
+        return libroEstudiante;
+    }
+    public Libro crearLibro(String nombreLibro, Tema generoLibro, String autorLibro, LocalDate fechaPublicacion) {
+        Libro libro = new Libro(nombreLibro,new Autor(autorLibro,"",""),generoLibro);
+        listaLibros.add(libro);
+        return libro;
+    }
+
+    public boolean actualizarLibro(Libro libroSeleccionado,Libro newLibro) {
+        Iterator<Libro> libroIterator = listaLibros.iterator();
+
+        while (libroIterator.hasNext()){
+            Libro libro = libroIterator.next();
+            if (libro.getNombre().equals(libroSeleccionado.getNombre())){
+                libro.setNombre(newLibro.getNombre());
+                libro.setAutor(newLibro.getAutor());
+                libro.setEstado(newLibro.getEstado());
+                libro.setFechaPublicacion(newLibro.getFechaPublicacion());
+                libro.setTemario(newLibro.getTemario());
+                return true;
+            }
+        }
+        return false;
+    }
+    public HashSet<Libro> mostrarNombreLibrosConBaseAOrdenacion() {
+        for (Libro libro : listaLibros) {
+            System.out.println(libro.getNombre());
+        }
+        return listaLibros;
+    }
+    public List<Libro> ordenarLibrosPorNombreYFecha() {
+        List<Libro> librosOrdenados = new ArrayList<>(listaLibros);
+
+        List<Libro> listaResultante = new ArrayList<>();
+
+        Iterator<Libro> iterator = librosOrdenados.iterator();
+
+        while (iterator.hasNext()) {
+            Libro libro1 = iterator.next();
+            Autor autorDelLibro1 = libro1.getAutor();
+
+            // Validar si el autor del libro 1 es nulo
+            if (autorDelLibro1 != null) {
+                String nombreDelAutor1 = autorDelLibro1.getNombre();
+                // Almacenar el primer libro en la lista resultante
+                listaResultante.add(libro1);
+
+                // Buscar otros libros con el mismo autor y agregarlos a la lista resultante
+                while (iterator.hasNext()) {
+                    Libro libro2 = iterator.next();
+                    Autor autorDelLibro2 = libro2.getAutor();
+
+                    // Validar si el autor del libro 2 es nulo
+                    if (autorDelLibro2 != null) {
+                        String nombreDelAutor2 = autorDelLibro2.getNombre();
+
+                        // Si los autores son iguales, agregar el libro a la lista resultante
+                        if (nombreDelAutor1.equals(nombreDelAutor2)) {
+                            listaResultante.add(libro2);
+                        } else {
+                            // Si los autores son diferentes, detener la búsqueda
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Ordenar la lista resultante por fecha de publicación
+        listaResultante.sort(new Comparator<Libro>() {
+            @Override
+            public int compare(Libro libro1, Libro libro2) {
+                LocalDate fecha1 = libro1.getFechaPublicacion();
+                LocalDate fecha2 = libro2.getFechaPublicacion();
+
+                // Validar si las fechas son nulas
+                if (fecha1 == null && fecha2 == null) {
+                    return 0; // Ambas fechas son nulas, considerar iguales
+                } else if (fecha1 == null) {
+                    return 1; // fecha1 es nula, considerar libro1 mayor
+                } else if (fecha2 == null) {
+                    return -1; // fecha2 es nula, considerar libro2 mayor
+                }
+
+                return fecha1.compareTo(fecha2);
+            }
+        });
+
+        return listaResultante;
+    }
+    public boolean eliminarLibro(String nombre) {
+        // Itera a través de la lista de libros
+        Iterator<Libro> iterador = listaLibros.iterator();
+        while (iterador.hasNext()) {
+            Libro libro = iterador.next();
+            if (libro.getNombre().equals(nombre)) {
+                // Si el nombre coincide, elimina el libro y devuelve true
+                iterador.remove();
+                return true;
+            }
+        }
+        // Si no se encontró el libro, devuelve false
+        return false;
+    }
+
 }

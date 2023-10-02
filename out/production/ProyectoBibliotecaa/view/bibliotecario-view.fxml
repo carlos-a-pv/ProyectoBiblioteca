@@ -9,21 +9,34 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="BibliotecarioView" prefHeight="496.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CrudBibliotecario">
+<AnchorPane fx:id="bibliotecarioView" prefHeight="496.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CrudBibliotecario">
    <children>
-      <ImageView fitHeight="110.0" fitWidth="328.0" layoutX="211.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="240.0" fitWidth="756.0" layoutX="-2.0" layoutY="-32.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@../resources/Biblioteca.PNG" />
+            <Image url="@../resources/biblioteca.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="44.0" layoutY="139.0" text="Nombre" />
-      <Label layoutX="44.0" layoutY="175.0" text="Apellido" />
-      <Label layoutX="44.0" layoutY="210.0" text="Identificación" />
-      <TextField fx:id="tfNombre" layoutX="130.0" layoutY="135.0" />
-      <TextField fx:id="tfApellido" layoutX="130.0" layoutY="171.0" />
-      <TextField fx:id="tfId" layoutX="130.0" layoutY="206.0" />
-      <Pane layoutX="321.0" layoutY="135.0" prefHeight="272.0" prefWidth="397.0">
+      <Label layoutX="44.0" layoutY="139.0" text="Nombre" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="175.0" text="Apellido" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="44.0" layoutY="210.0" text="Identificación" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNombre" layoutX="159.0" layoutY="140.0" />
+      <TextField fx:id="tfApellido" layoutX="159.0" layoutY="176.0" />
+      <TextField fx:id="tfId" layoutX="159.0" layoutY="211.0" />
+      <Pane layoutX="330.0" layoutY="133.0" prefHeight="272.0" prefWidth="397.0">
          <children>
             <TableView fx:id="tbBibliotecarios" prefHeight="272.0" prefWidth="397.0">
                <columns>
@@ -34,8 +47,20 @@
             </TableView>
          </children>
       </Pane>
-      <Button fx:id="btnCrear" layoutX="93.0" layoutY="417.0" mnemonicParsing="false" onAction="#OnCrearBibliotecarioClick" text="Crear" />
-      <Button fx:id="btnActualizar" layoutX="211.0" layoutY="417.0" mnemonicParsing="false" onAction="#OnActualizarBibliotecarioClick" text="Actualizar" />
-      <Button fx:id="btnEliminar" layoutX="659.0" layoutY="417.0" mnemonicParsing="false" onAction="#OnEliminarBibliotecarioClick" text="Eliminar" />
+      <Button fx:id="btnCrear" layoutX="104.0" layoutY="418.0" mnemonicParsing="false" onAction="#OnCrearBibliotecarioClick" text="Crear" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnActualizar" layoutX="210.0" layoutY="418.0" mnemonicParsing="false" onAction="#OnActualizarBibliotecarioClick" text="Actualizar" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEliminar" layoutX="606.0" layoutY="418.0" mnemonicParsing="false" onAction="#OnEliminarBibliotecarioClick" text="Eliminar" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

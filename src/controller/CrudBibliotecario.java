@@ -7,6 +7,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import model.Bibliotecario;
 
 import java.util.Optional;
@@ -16,7 +22,7 @@ import static controller.AppController.INSTANCE;
 public class CrudBibliotecario {
 
     @FXML
-    private AnchorPane BibliotecarioView;
+    private AnchorPane bibliotecarioView;
 
     @FXML
     private Button btnActualizar;
@@ -54,7 +60,12 @@ public class CrudBibliotecario {
 
     @FXML
     void initialize() {
-
+        Color paint = new Color(0.0, 0.0, 0.0, 1.0);
+        Color paintBtn = new Color(0.0044, 0.4737, 0.0279, 1.0);
+        btnCrear.setBackground(new Background(new BackgroundFill(paintBtn,null,null)));
+        btnActualizar.setBackground(new Background(new BackgroundFill(paintBtn,null,null)));
+        btnEliminar.setBackground(new Background(new BackgroundFill(paintBtn,null,null)));
+        bibliotecarioView.setBackground(new Background(new BackgroundFill(paint,null,null)));
         tbBibliotecarios.setItems(getListaBibliotecariosData());
         this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.columnApellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
@@ -83,42 +94,50 @@ public class CrudBibliotecario {
         String nombre = tfNombre.getText();
         String apellido = tfApellido.getText();
         String id = tfId.getText();
-        boolean bibliotecarioActualizado = false;
+        if (datosValidos(nombre,apellido,id)){
+            boolean bibliotecarioActualizado = false;
 
-        //2. verificar el empleado seleccionado
-        if(bibliotecarioSeleccionado != null){
-            //3. Validar la información
-            if(datosValidos(nombre, apellido, id)== true){
+            //2. verificar el empleado seleccionado
+            if(bibliotecarioSeleccionado != null){
+                //3. Validar la información
+                if(datosValidos(nombre, apellido, id)== true){
 
-                bibliotecarioActualizado = INSTANCE.getModel().actualizarBibliotecario(bibliotecarioSeleccionado.getId(), nombre, apellido, id);
+                    bibliotecarioActualizado = INSTANCE.getModel().actualizarBibliotecario(bibliotecarioSeleccionado.getId(), nombre, apellido, id);
 
-                if(bibliotecarioActualizado == true){
-                    tbBibliotecarios.refresh();
-                    limpiarCampos();
-                    mostrarMensaje("Notificación estudiante", "Estudiante actualizado", "El estudiante se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    if(bibliotecarioActualizado == true){
+                        tbBibliotecarios.refresh();
+                        limpiarCampos();
+                        mostrarMensaje("Notificación Bibliotecario", "Bibliotecario actualizado", "El bibliotecario se ha actualizado con éxito", Alert.AlertType.INFORMATION);
 
+                    }else{
+                        mostrarMensaje("Notificación Bibliotecario", "Bibliotecario no actualizado", "El bibliotecario no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                        limpiarCampos();
+                    }
                 }else{
-                    mostrarMensaje("Notificación estudiante", "Estudiante no actualizado", "El empleado no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                    limpiarCampos();
+                    mostrarMensaje("Notificación Bibliotecario", "Bibliotecario no actualizado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
                 }
-            }else{
-                mostrarMensaje("Notificación estudiante", "Estudiante no actualizado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+
             }
-
         }
-
+        else {
+            mostrarMensaje("Notificación Bibliotecario", "Bibliotecario no actualizado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+        }
     }
 
 
     @FXML
     void OnCrearBibliotecarioClick(ActionEvent event) {
         if (datosValidos(tfNombre.getText(),tfApellido.getText(),tfId.getText())){
+            tbBibliotecarios.getItems().clear();
             Bibliotecario bibliotecario = new Bibliotecario(tfNombre.getText(),tfApellido.getText(),tfId.getText());
             INSTANCE.getModel().añadirBibliotecario(bibliotecario);
             limpiarCampos();
-            mostrarMensaje("Información","El estudiante ha sido creado","", Alert.AlertType.INFORMATION);
-            tbBibliotecarios.setItems(FXCollections.observableArrayList(INSTANCE.getModel().getBibliotecarios()));
+            mostrarMensaje("Información","El bibliotecario ha sido creado","", Alert.AlertType.INFORMATION);
+            listBibliotecarioData.addAll(INSTANCE.getModel().getBibliotecarios());
+            tbBibliotecarios.setItems(listBibliotecarioData);
             tbBibliotecarios.refresh();
+        }else {
+            mostrarMensaje("Notificación bibliotecario", "bibliotecario no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
 
     }
@@ -133,14 +152,14 @@ public class CrudBibliotecario {
                 tbBibliotecarios.setItems(FXCollections.observableArrayList(INSTANCE.getModel().getBibliotecarios()));
                 tbBibliotecarios.refresh();
 
-                mostrarMensaje("Notificación estudiante", "Estudiante eliminado", "El estudiante se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+                mostrarMensaje("Notificación bibliotecario", "bibliotecario eliminado", "El bibliotecario se ha eliminado con éxito", Alert.AlertType.INFORMATION);
 
             }else{
-                mostrarMensaje("Notificación estudiante", "Estudiante no eliminado", "El empleado no se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+                mostrarMensaje("Notificación bibliotecario", "bibliotecario no eliminado", "El bibliotecario no se ha eliminado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCampos();
             }
         }else{
-            mostrarMensaje("Notificación estudiante", "Estudiante no eliminado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificación bibliotecario", "bibliotecario no eliminado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
     }
 

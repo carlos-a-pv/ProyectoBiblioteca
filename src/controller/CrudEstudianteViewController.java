@@ -160,12 +160,11 @@ public class CrudEstudianteViewController {
 
     @FXML
     void initialize() {
-        LinearGradient paint = new LinearGradient(
-        0.2227, 0.1422, 1.0, 1.0, true, CycleMethod.NO_CYCLE,
-        new Stop(0.0, new Color(0.0195, 0.39, 0.0998, 0.9442)),
-        new Stop(1.0, new Color(1.0, 1.0, 1.0, 1.0)));
+        Color paint = new Color(0.0, 0.0, 0.0, 1.0);
         Color paintBtn = new Color(0.0044, 0.4737, 0.0279, 1.0);
         btnCrear.setBackground(new Background(new BackgroundFill(paintBtn,null,null)));
+        btnActualizar.setBackground(new Background(new BackgroundFill(paintBtn,null,null)));
+        btnEliminar.setBackground(new Background(new BackgroundFill(paintBtn,null,null)));
         estudianteView.setBackground(new Background(new BackgroundFill(paint,null,null)));
         tbEstudiantes.setItems(getListaEstudiantesData());
         this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));

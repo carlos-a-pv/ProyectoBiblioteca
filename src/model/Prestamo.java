@@ -10,6 +10,14 @@ public class Prestamo {
         this.detallePrestamo = detallePrestamo;
     }
 
+    public DetallePrestamo getDetallePrestamo() {
+        return detallePrestamo;
+    }
+
+    public void setDetallePrestamo(DetallePrestamo detallePrestamo) {
+        this.detallePrestamo = detallePrestamo;
+    }
+
     private String crearCodigo() {
         String codigo = "";
 
