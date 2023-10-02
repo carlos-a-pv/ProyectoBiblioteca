@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="devolucionView" prefHeight="607.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DevolucionViewController">
+   <children>
+      <TableView fx:id="tbLibros" layoutX="46.0" layoutY="189.0" prefHeight="306.0" prefWidth="810.0">
+         <columns>
+            <TableColumn fx:id="colNombre" prefWidth="370.0" text="Nombre" />
+            <TableColumn fx:id="colAutor" prefWidth="232.0" text="Autor" />
+            <TableColumn fx:id="colEstado" prefWidth="207.0" text="Estado" />
+         </columns>
+      </TableView>
+      <Text layoutX="288.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema De Devolución">
+         <font>
+            <Font name="Segoe UI Black" size="29.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnPrestar" layoutX="360.0" layoutY="519.0" mnemonicParsing="false" onAction="#onDevolver" prefHeight="31.0" prefWidth="183.0" text="Devolver" textFill="#041e06">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="tfId" layoutX="48.0" layoutY="61.0" prefHeight="25.0" prefWidth="596.0" promptText="Ingrese la cedula del estudiante o el codigo del prestamo">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text fx:id="txtMensaje" layoutX="47.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="810.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <MenuButton fx:id="menuBuscar" layoutX="663.0" layoutY="61.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="193.0" text="Buscar por:">
+         <items>
+            <MenuItem fx:id="btnBuscarId" mnemonicParsing="false" onAction="#onBuscarId" text="Buscar por cedula" />
+            <MenuItem fx:id="btnBuscarCodigo" mnemonicParsing="false" onAction="#onBuscarCodigo" text="Buscar por codigo" />
+         </items>
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </MenuButton>
+   </children>
+</AnchorPane>

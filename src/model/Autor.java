@@ -1,18 +1,19 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Autor {
     private String nombre;
     private String apellido;
     private String id;
-    private ArrayList<Libro> librosEscritos;
+    private HashSet<Libro> librosEscritos;
 
     public Autor(String nombre, String apellido, String id){
         this.nombre =nombre;
         this.apellido = apellido;
         this.id = id;
-        this.librosEscritos = new ArrayList<>();
+        this.librosEscritos =new HashSet<>();
     }
 
     public String getNombre() {
@@ -39,11 +40,11 @@ public class Autor {
         this.id = id;
     }
 
-    public ArrayList<Libro> getLibrosEscritos() {
+    public HashSet<Libro> getLibrosEscritos() {
         return librosEscritos;
     }
 
-    public void setLibrosEscritos(ArrayList<Libro> librosEscritos) {
+    public void setLibrosEscritos(HashSet<Libro> librosEscritos) {
         this.librosEscritos = librosEscritos;
     }
 

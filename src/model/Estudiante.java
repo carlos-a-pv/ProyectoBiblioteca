@@ -1,6 +1,9 @@
 package model;
 
-public class Estudiante implements Comparable<Estudiante>{
+import java.time.LocalDate;
+import java.util.HashSet;
+
+public class Estudiante implements Comparable <Estudiante> {
     private String nombre;
     private String apellido;
     private String id;
@@ -10,7 +13,6 @@ public class Estudiante implements Comparable<Estudiante>{
         this.apellido = apellido;
         this.id = id;
     }
-    public Estudiante(){}
 
     public String getNombre() {
         return nombre;

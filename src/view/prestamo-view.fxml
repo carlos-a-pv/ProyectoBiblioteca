@@ -7,24 +7,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="492.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrestamoViewController">
-   <children>
-      <TableView fx:id="tbLibros" layoutX="31.0" layoutY="53.0" prefHeight="306.0" prefWidth="547.0">
-        <columns>
-          <TableColumn fx:id="colNombre" prefWidth="193.0" text="Nombre" />
-          <TableColumn fx:id="colAutor" prefWidth="76.0" text="Autor" />
-            <TableColumn fx:id="colFechaPublicacion" prefWidth="120.0" text="Fecha Publicacion" />
-            <TableColumn fx:id="colEstado" prefWidth="157.0" text="Estado" />
-        </columns>
-      </TableView>
-      <Text fill="#229a3a" layoutX="211.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema De Prestamo">
-         <font>
-            <Font name="Segoe UI Black" size="19.0" />
-         </font>
-      </Text>
-      <Button fx:id="btnPrestar" layoutX="266.0" layoutY="389.0" mnemonicParsing="false" onAction="#onClickPrestar" prefHeight="25.0" prefWidth="77.0" text="Prestar" textFill="#041e06">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font></Button>
-   </children>
+<AnchorPane fx:id="prestamoView" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrestamoViewController">
+    <children>
+        <TableView fx:id="tbLibros" layoutX="31.0" layoutY="61.0" prefHeight="427.0" prefWidth="839.0">
+            <columns>
+                <TableColumn fx:id="colNombre" prefWidth="345.0" text="Nombre" />
+                <TableColumn fx:id="colAutor" prefWidth="199.0" text="Autor" />
+                <TableColumn fx:id="colFechaPublicacion" prefWidth="157.0" text="Fecha Publicacion" />
+                <TableColumn fx:id="colEstado" prefWidth="137.0" text="Estado" />
+            </columns>
+        </TableView>
+        <Text layoutX="299.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sistema De Prestamo">
+            <font>
+                <Font name="Segoe UI Black" size="29.0" />
+            </font>
+        </Text>
+        <Button fx:id="btnPrestar" layoutX="402.0" layoutY="504.0" mnemonicParsing="false" onAction="#onClickPrestar" prefHeight="39.0" prefWidth="97.0" text="Prestar" textFill="#041e06">
+            <font>
+                <Font name="System Bold Italic" size="18.0" />
+            </font></Button>
+    </children>
 </AnchorPane>
